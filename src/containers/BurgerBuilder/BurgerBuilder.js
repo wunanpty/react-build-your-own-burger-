@@ -82,32 +82,33 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        // alert('You continue!');
-        // send request to backend
-        this.setState({loading: true});
-        const order = {
-            ingredients: this.state.ingredients,
-            //in real project, this would be calculated on the server (backend)
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Nan Wu',
-                address: {
-                    street: 'TestStreet 1',
-                    zipcode: '98888',
-                    country: 'US'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'ups'
-        }
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({loading: false, purchasing: false });
-                console.log(response);
-            })
-            .catch(error => {
-                this.setState({loading: false, purchasing: false });
-            } );
+        // // alert('You continue!');
+        // // send request to backend
+        // this.setState({loading: true});
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     //in real project, this would be calculated on the server (backend)
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Nan Wu',
+        //         address: {
+        //             street: 'TestStreet 1',
+        //             zipcode: '98888',
+        //             country: 'US'
+        //         },
+        //         email: 'test@test.com'
+        //     },
+        //     deliveryMethod: 'ups'
+        // }
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         this.setState({loading: false, purchasing: false });
+        //         console.log(response);
+        //     })
+        //     .catch(error => {
+        //         this.setState({loading: false, purchasing: false });
+        //     } );
+        this.props.history.push('/checkout');
     }
 
     render () {
