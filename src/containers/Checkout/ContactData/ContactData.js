@@ -85,6 +85,23 @@ class ContactData extends Component {
             } );
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        // First step: copy original orderForm
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        };
+        // Aslo copy the properties inside my selected orderForm deeply
+        const updatedFormElement = { 
+            ...updatedOrderForm[inputIdentifier]
+        };
+        // Safely update the value
+        updatedFormElement.value = event.target.value;
+        // Set the update order to the copied orderForm
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        // Finally, call setState
+        this.setState({orderForm: updatedOrderForm});
+    }
+
     render () {
         // Dynamically Creat Inputs based on JS Config
         const formElementsArray = [];
@@ -96,13 +113,13 @@ class ContactData extends Component {
         }
         let form = (
             <form>
-                    <Input elementType="..." elementConfig="..." value="..." />
                     {formElementsArray.map(formElement => (
                         <Input
                             key={formElement.id} 
                             elementType={formElement.config.elementType}
                             elementConfig={formElement.config.elementConfig}
-                            value={formElement.config.value} />
+                            value={formElement.config.value} 
+                            changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
                     ))}
                     <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
             </form>
