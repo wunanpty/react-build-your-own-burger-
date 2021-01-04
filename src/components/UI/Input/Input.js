@@ -6,7 +6,8 @@ const input = (props) => {
     const inputClasses = [classes.InputElement];
 
     // When some invalid input come, push to a Invalid stype
-    if (props.invalid && props.shouldValidate) {
+    // by default, when customer not touch the input yet, the input show ok (not red)
+    if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(classes.Invalid);
     }
 
